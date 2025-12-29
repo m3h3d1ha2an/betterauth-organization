@@ -2,18 +2,10 @@
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import z from "zod";
+import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-  InputGroupButton,
-} from "@/components/ui/input-group";
-import { Button } from "./ui/button";
-import { useState } from "react";
-import { Eye, EyeOff } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { InputGroupAddon } from "@/components/ui/input-group";
 
 const signInSchema = z.object({
   username: z.string().min(1, { error: "Username is required." }),
@@ -38,9 +30,8 @@ export const SigninForm = () => {
     >
       <FieldSet>
         <FieldGroup>
-          <form.Field
-            name="username"
-            children={(field) => {
+          <form.Field name="username">
+            {(field) => {
               const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field orientation="responsive" data-invalid={isInvalid}>
@@ -54,55 +45,14 @@ export const SigninForm = () => {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                     aria-invalid={isInvalid}
-                    autoComplete="off"
                     className="text-base! shadow-xs"
+                    autoComplete="off"
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
               );
             }}
-          />
-          <form.Field
-            name="password"
-            children={(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-              return (
-                <Field orientation="responsive" data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name} className="text-sm">
-                    Password
-                  </FieldLabel>
-                  <InputGroup>
-                    <InputGroupInput
-                      id={field.name}
-                      type={showPassword ? "text" : "password"}
-                      name={field.name}
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      autoComplete="off"
-                      className="text-base!"
-                    />
-                    <InputGroupAddon align="inline-end">
-                      <InputGroupButton
-                        size="icon-xs"
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        <HugeiconsIcon icon={showPassword ? EyeOff : Eye} />
-                      </InputGroupButton>
-                    </InputGroupAddon>
-                  </InputGroup>
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                </Field>
-              );
-            }}
-          />
-          <Field orientation="responsive">
-            <Button type="submit" className="hover:bg-primary/80 text-sm">
-              Submit
-            </Button>
-          </Field>
+          </form.Field>
         </FieldGroup>
       </FieldSet>
     </form>
