@@ -1,14 +1,8 @@
 import Image from "next/image";
-import { SigninForm } from "@/components/signin-form";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { SignupForm } from "@/components/signup-form";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const SignIn = () => {
+const Signup = () => {
   return (
     <Card className="relative w-full max-w-sm overflow-hidden">
       <CardHeader className="text-center">
@@ -19,16 +13,16 @@ const SignIn = () => {
           width={50}
           className="mx-auto"
         />
-        <CardTitle className="text-lg md:text-xl">Welcome back!</CardTitle>
+        <CardTitle className="text-lg md:text-xl">Get Started</CardTitle>
         <CardDescription className="text-xs md:text-sm">
-          Enter your information below to sign in.
+          Enter your information below to create an account.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <SigninForm />
+        <SignupForm />
       </CardContent>
     </Card>
   );
 };
 
-export default SignIn;
+export default Signup;

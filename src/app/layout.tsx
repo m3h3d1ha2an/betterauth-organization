@@ -15,16 +15,8 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-  <html
-    className="bg-white text-black selection:bg-black selection:text-white"
-    lang="en"
-  >
-    <body
-      className={cn(
-        bricolageGrotesque.className,
-        "min-h-dvh bg-gray-50 antialiased",
-      )}
-    >
+  <html className="bg-white text-black selection:bg-black selection:text-white" lang="en">
+    <body className={cn(bricolageGrotesque.className, "min-h-dvh bg-gray-50 antialiased")}>
       {children}
       <Toaster position="top-center" richColors />
     </body>

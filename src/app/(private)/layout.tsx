@@ -5,12 +5,8 @@ const PrivateLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getCurrentUser();
   if (!user) {
     console.log("Layout Defense");
-    redirect("/auth/signin");
+    redirect("/auth/login");
   }
-  return (
-    <main className="min-h-dvh flex flex-col items-center justify-center">
-      {children}
-    </main>
-  );
+  return <main className="min-h-dvh flex flex-col items-center justify-center">{children}</main>;
 };
 export default PrivateLayout;

@@ -8,7 +8,7 @@ export const proxy = async (request: NextRequest) => {
 
   if (!sessionCookie && !isAuthRoute) {
     console.log("Proxy Defense");
-    return NextResponse.redirect(new URL("/auth/signin", request.url));
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   if (sessionCookie && isAuthRoute) {
@@ -20,7 +20,5 @@ export const proxy = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)"],
 };

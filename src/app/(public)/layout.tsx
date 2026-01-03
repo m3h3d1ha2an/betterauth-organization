@@ -7,10 +7,6 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
     console.log("Layout Defense");
     redirect("/app/dashboard");
   }
-  return (
-    <main className="min-h-dvh flex flex-col items-center justify-center">
-      {children}
-    </main>
-  );
+  return <main className="min-h-dvh flex flex-col items-center justify-center">{children}</main>;
 };
 export default PublicLayout;
