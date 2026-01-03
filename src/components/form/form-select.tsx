@@ -1,7 +1,7 @@
 import { Activity } from "react";
+import { useFieldContext } from "@/components/form/hook";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useFieldContext } from "./hook";
 
 export const FormSelect = ({ label, children }: { label: string; children: React.ReactNode }) => {
   const field = useFieldContext<string>();

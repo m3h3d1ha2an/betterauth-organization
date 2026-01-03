@@ -1,7 +1,7 @@
 import { Activity } from "react";
+import { useFieldContext } from "@/components/form/hook";
 import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
-import { useFieldContext } from "./hook";
 
 export const FormTextarea = ({ label, description }: { label: string; description?: string }) => {
   const field = useFieldContext<string>();

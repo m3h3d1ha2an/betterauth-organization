@@ -4,7 +4,7 @@ import type { loginSchema } from "@/schemas/login";
 export type Login = z.infer<typeof loginSchema>;
 
 export const loginDefaults: Login = {
-  username: "",
+  email: "",
   password: "",
-  remember: false,
+  rememberMe: false,
 };

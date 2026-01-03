@@ -1,7 +1,13 @@
 import z from "zod";
 
 export const loginSchema = z.object({
-  username: z.string().min(1, { error: "Username is required." }),
-  password: z.string().min(1, { error: "Password is required." }),
-  remember: z.boolean(),
+  email: z
+    .email()
+    .min(2, "Email must be at least 2 characters long")
+    .max(100, "Email must be at most 100 characters long"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .max(100, "Password must be at most 100 characters long"),
+  rememberMe: z.boolean(),
 });

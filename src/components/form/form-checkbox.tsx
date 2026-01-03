@@ -1,7 +1,7 @@
 import { Activity } from "react";
+import { useFieldContext } from "@/components/form/hook";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field";
-import { useFieldContext } from "./hook";
 
 export const FormCheckbox = ({ label, horizontal }: { label: string; horizontal?: boolean }) => {
   const field = useFieldContext<boolean>();
@@ -17,7 +17,9 @@ export const FormCheckbox = ({ label, horizontal }: { label: string; horizontal?
         aria-invalid={isInvalid}
       />
       <FieldContent>
-        <FieldLabel htmlFor={field.name} className="text-sm">{label}</FieldLabel>
+        <FieldLabel htmlFor={field.name} className="text-sm">
+          {label}
+        </FieldLabel>
         <Activity mode={isInvalid ? "visible" : "hidden"}>
           <FieldError errors={field.state.meta.errors} />
         </Activity>
