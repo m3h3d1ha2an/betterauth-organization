@@ -1,4 +1,4 @@
-import "./src/env";
+import "./src/envConfig";
 import { defineConfig, env } from "prisma/config";
 
 const prismaConfig = defineConfig({

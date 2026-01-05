@@ -11,5 +11,4 @@ export const env = createEnv({
     BETTER_AUTH_URL: z.url("Please provide a valid URL"),
   },
   experimental__runtimeEnv: process.env,
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });
