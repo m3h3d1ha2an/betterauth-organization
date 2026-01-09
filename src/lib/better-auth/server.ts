@@ -1,45 +1,52 @@
+import { hash, type Options, verify } from "@node-rs/argon2";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
 import { emailVerificationHtml, emailVerificationText } from "@/lib/emails/email-verification";
-import { getTestMessageUrl, transporter } from "@/lib/nodemailer";
+import { resetPasswordHtml, resetPasswordText } from "@/lib/emails/reset-password";
 import { db } from "@/lib/prisma";
-import { resetPasswordHtml, resetPasswordText } from "../emails/reset-password";
+import { transporter } from "@/lib/transporter";
+
+const options: Options = {
+  memoryCost: 19456,
+  timeCost: 2,
+  outputLen: 32,
+  parallelism: 1,
+};
 
 export const auth = betterAuth({
   database: prismaAdapter(db, { provider: "postgresql" }),
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
+    password: {
+      hash: async (password) => await hash(password, options),
+      verify: async ({ hash, password }) => await verify(hash, password, options),
+    },
     requireEmailVerification: true,
     resetPasswordTokenExpiresIn: 60 * 60 * 24 * 1, // Seconds * Minutes * Hours * Days
     sendResetPassword: async ({ user: { name, email }, url }) => {
-      const result = await transporter.sendMail({
+      await transporter.sendMail({
         from: "BetterAuth Organization <support@betterauth-org.com",
         to: email,
         subject: "Reset your password",
         text: await resetPasswordText(name, url, "24 hours"),
         html: await resetPasswordHtml(name, url, "24 hours"),
       });
-      console.log({ url });
-      console.log("Preview: %s", getTestMessageUrl(result));
     },
   },
   emailVerification: {
     autoSignInAfterVerification: true,
-    sendOnSignIn: true,
     sendOnSignUp: true,
     expiresIn: 60 * 60 * 24 * 1, // Seconds * Minutes * Hours * Days
     sendVerificationEmail: async ({ user: { name, email }, url }) => {
-      const result = await transporter.sendMail({
+      await transporter.sendMail({
         from: "BetterAuth Organization <support@betterauth-org.com",
         to: email,
         subject: "Verify your email",
         text: await emailVerificationText(name, url, "24 hours"),
         html: await emailVerificationHtml(name, url, "24 hours"),
       });
-      console.log({ url });
-      console.log("Preview: %s", getTestMessageUrl(result));
     },
   },
   session: {
@@ -52,3 +59,5 @@ export const auth = betterAuth({
   },
   plugins: [nextCookies()],
 });
+
+export type ErrorCode = keyof typeof auth.$ERROR_CODES | "UNKNOWN";

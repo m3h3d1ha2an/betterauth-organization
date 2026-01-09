@@ -19,13 +19,17 @@ export const SignupForm = () => {
     onSubmit: async ({ value }) => {
       const { data, error } = await authClient.signUp.email(value);
       if (data) {
-        router.push("/auth/login");
+        const newTargetTime = Date.now() + 30 * 1000;
+        localStorage.setItem("email_resend_target", newTargetTime.toString());
+        sessionStorage.setItem("pending_verification_email", data.user.email);
+        router.replace("/auth/verify");
       }
       if (error) {
         toast.error(error.message ?? "Something went wrong");
       }
     },
   });
+
   return (
     <form
       onSubmit={(e) => {

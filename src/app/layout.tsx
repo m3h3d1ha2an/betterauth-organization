@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
@@ -15,9 +16,11 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-  <html className="bg-white text-black selection:bg-black selection:text-white" lang="en">
-    <body className={cn(bricolageGrotesque.className, "min-h-dvh bg-gray-50 antialiased")}>
-      {children}
+  <html lang="en" suppressHydrationWarning>
+    <body className={cn(bricolageGrotesque.className, "min-h-dvh antialiased")}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        {children}
+      </ThemeProvider>
       <Toaster position="top-center" richColors />
     </body>
   </html>

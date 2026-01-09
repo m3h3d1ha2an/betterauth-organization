@@ -22,6 +22,20 @@ export const LoginForm = () => {
         router.push("/app/dashboard");
       }
       if (error) {
+        if (error.code === "EMAIL_NOT_VERIFIED") {
+          const toastId = toast.loading("Account not verified. Redirecting...");
+
+          // Set your storage items for the Verify page
+          const newTargetTime = Date.now() + 30 * 1000;
+          localStorage.setItem("email_resend_target", newTargetTime.toString());
+          sessionStorage.setItem("pending_verification_email", value.email);
+
+          router.replace("/auth/verify");
+          toast.success("Check your inbox for verification email.", {
+            id: toastId,
+          });
+          return;
+        }
         toast.error(error.message ?? "Something went wrong");
       }
     },
@@ -35,8 +49,12 @@ export const LoginForm = () => {
       }}
     >
       <FieldGroup>
-        <form.AppField name="email">{(field) => <field.Input label="Email" type="email" />}</form.AppField>
-        <form.AppField name="password">{(field) => <field.Input label="Password" type="password" />}</form.AppField>
+        <form.AppField name="email">
+          {(field) => <field.Input label="Email" type="email" />}
+        </form.AppField>
+        <form.AppField name="password">
+          {(field) => <field.Input label="Password" type="password" />}
+        </form.AppField>
         <Field orientation="horizontal">
           <form.AppField name="rememberMe">
             {(field) => <field.Checkbox label="Remember me" horizontal />}
@@ -50,7 +68,11 @@ export const LoginForm = () => {
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
-            <Button type="submit" className="hover:bg-blue-800 text-base" disabled={!canSubmit}>
+            <Button
+              type="submit"
+              className="hover:bg-blue-800 text-base"
+              disabled={!canSubmit}
+            >
               {isSubmitting && <Spinner />}
               Login
             </Button>
