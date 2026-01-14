@@ -1,11 +1,10 @@
-import { createAuthMiddleware } from "better-auth/api";
-import { sendWelcomeEmail } from "./email";
+// import { createAuthMiddleware } from "better-auth/api";
 import type { AuthOptions } from "./server";
 
 type BetterAuthHooksFunction = NonNullable<AuthOptions["hooks"]>;
 
 export const betterAuthHooks: BetterAuthHooksFunction = {
-  after: createAuthMiddleware(async (payload) => {
+  // after: createAuthMiddleware(async (payload) => {
     // =====================================================
     //  Send Welcome Mail After Sign Up Before Verification
     // =====================================================
@@ -15,14 +14,5 @@ export const betterAuthHooks: BetterAuthHooksFunction = {
     //     await sendWelcomeEmail(user.name, user.email);
     //   }
     // }
-    // ======================================================
-    //  Send Welcome Mail After Sign Up And Verification
-    // ======================================================
-    if (payload.path.startsWith("/verify-email")) {
-      const user = payload.context.session?.user;
-      if (user) {
-        await sendWelcomeEmail(user.name, user.email);
-      }
-    }
-  }),
+  // }),
 };

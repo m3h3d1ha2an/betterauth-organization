@@ -4,7 +4,7 @@ import { ArrowLeft02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { useAppForm } from "@/components/form/hook";
+import { useAppForm } from "@/components/form/form-hooks";
 import { Button } from "@/components/ui/button";
 import { FieldGroup } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";

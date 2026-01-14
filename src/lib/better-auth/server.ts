@@ -1,7 +1,7 @@
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { type BetterAuthOptions, betterAuth } from "better-auth/minimal";
 import { db } from "@/lib/prisma";
-import { sendResetPasswordEmail, sendVerificationEmail } from "./email";
+import { afterEmailVerification, sendResetPasswordEmail, sendVerificationEmail } from "./email";
 import { betterAuthHooks } from "./hooks";
 import { passwordOptions } from "./password";
 import { betterAuthPlugins } from "./plugins";
@@ -22,6 +22,7 @@ export const auth = betterAuth({
     sendOnSignUp: true,
     expiresIn: 60 * 60 * 1, // Seconds * Minutes * Hours * Days
     sendVerificationEmail: sendVerificationEmail,
+    afterEmailVerification: afterEmailVerification,
   },
   session: betterAuthSession,
   hooks: betterAuthHooks,

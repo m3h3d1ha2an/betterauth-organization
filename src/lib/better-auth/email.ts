@@ -6,9 +6,10 @@ import type { AuthOptions } from "./server";
 
 type SendResetPasswordEmailFunction = NonNullable<AuthOptions["emailAndPassword"]>["sendResetPassword"];
 type SendVerificationEmailFunction = NonNullable<AuthOptions["emailVerification"]>["sendVerificationEmail"];
+type AfterEmailVerificaton = NonNullable<AuthOptions["emailVerification"]>["afterEmailVerification"]
 
 export const sendResetPasswordEmail: SendResetPasswordEmailFunction = async ({ user: { name, email }, url }) => {
-  await transporter.sendMail({
+  void transporter.sendMail({
     from: "BetterAuth Organization <support@betterauth-org.com",
     to: email,
     subject: "Reset your password",
@@ -18,7 +19,7 @@ export const sendResetPasswordEmail: SendResetPasswordEmailFunction = async ({ u
 };
 
 export const sendVerificationEmail: SendVerificationEmailFunction = async ({ user: { name, email }, url }) => {
-  await transporter.sendMail({
+  void transporter.sendMail({
     from: "BetterAuth Organization <support@betterauth-org.com",
     to: email,
     subject: "Verify your email",
@@ -27,12 +28,12 @@ export const sendVerificationEmail: SendVerificationEmailFunction = async ({ use
   });
 };
 
-export const sendWelcomeEmail = async (name: string, email: string) => {
-  await transporter.sendMail({
+export const afterEmailVerification:AfterEmailVerificaton = async ({ name, email }) => {
+  void transporter.sendMail({
     from: "BetterAuth Organization <support@betterauth-org.com",
     to: email,
     subject: "Welcome to BetterAuth Organization!",
     text: await welcomeMessageText(name),
     html: await welcomeMessageHtml(name),
   });
-};
+}
