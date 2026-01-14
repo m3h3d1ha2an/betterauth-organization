@@ -1,4 +1,4 @@
-import { getCookieCache } from "better-auth/cookies";
+import { getSessionCookie } from "better-auth/cookies";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const proxy = async (request: NextRequest) => {
@@ -9,7 +9,7 @@ export const proxy = async (request: NextRequest) => {
 
   const isAppBaseRoute = pathname === "/app";
 
-  const sessionCookie = await getCookieCache(request);
+  const sessionCookie = getSessionCookie(request);
 
   if (!sessionCookie && !isAuthRoute) {
     return NextResponse.redirect(new URL("/auth/login", request.url));

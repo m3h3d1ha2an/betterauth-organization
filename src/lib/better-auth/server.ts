@@ -14,13 +14,13 @@ export const auth = betterAuth({
     autoSignIn: false,
     password: passwordOptions,
     requireEmailVerification: true,
-    resetPasswordTokenExpiresIn: 60 * 1, // Seconds * Minutes * Hours * Days
+    resetPasswordTokenExpiresIn: 60 * 60 * 1, // Seconds * Minutes * Hours * Days
     sendResetPassword: sendResetPasswordEmail,
   },
   emailVerification: {
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
-    expiresIn: 60 * 60 * 1, // Seconds * Minutes * Hours * Days
+    expiresIn: 60 * 60 * 24, // Seconds * Minutes * Hours * Days
     sendVerificationEmail: sendVerificationEmail,
     afterEmailVerification: afterEmailVerification,
   },
