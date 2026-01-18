@@ -6,7 +6,7 @@ import type { AuthOptions } from "./server";
 
 type SendResetPasswordEmailFunction = NonNullable<AuthOptions["emailAndPassword"]>["sendResetPassword"];
 type SendVerificationEmailFunction = NonNullable<AuthOptions["emailVerification"]>["sendVerificationEmail"];
-type AfterEmailVerificaton = NonNullable<AuthOptions["emailVerification"]>["afterEmailVerification"]
+type AfterEmailVerificaton = NonNullable<AuthOptions["emailVerification"]>["afterEmailVerification"];
 
 export const sendResetPasswordEmail: SendResetPasswordEmailFunction = async ({ user: { name, email }, url }) => {
   void transporter.sendMail({
@@ -28,7 +28,7 @@ export const sendVerificationEmail: SendVerificationEmailFunction = async ({ use
   });
 };
 
-export const afterEmailVerification:AfterEmailVerificaton = async ({ name, email }) => {
+export const afterEmailVerification: AfterEmailVerificaton = async ({ name, email }) => {
   void transporter.sendMail({
     from: "BetterAuth Organization <support@betterauth-org.com",
     to: email,
@@ -36,4 +36,4 @@ export const afterEmailVerification:AfterEmailVerificaton = async ({ name, email
     text: await welcomeMessageText(name),
     html: await welcomeMessageHtml(name),
   });
-}
+};

@@ -1,17 +1,26 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { AppHeader } from "@/components/app-header";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { getCurrentUser } from "@/lib/queries";
 
 const PrivateLayout = async ({ children }: { children: React.ReactNode }) => {
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
   const user = await getCurrentUser();
   if (!user) {
     redirect("/auth/login");
   }
   return (
-    <main className="min-h-dvh flex flex-col items-center justify-center relative">
-      <ThemeToggle className="absolute top-4 right-4" size="icon-lg" variant="outline" />
-      {children}
-    </main>
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <AppSidebar />
+      <main className="w-full mr-6">
+        <AppHeader />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 };
+
 export default PrivateLayout;

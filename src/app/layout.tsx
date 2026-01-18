@@ -20,8 +20,8 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
     <body className={cn(bricolageGrotesque.className, "min-h-dvh antialiased")}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         {children}
+        <Toaster position="top-center" richColors />
       </ThemeProvider>
-      <Toaster position="top-center" richColors />
     </body>
   </html>
 );

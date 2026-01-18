@@ -8,6 +8,6 @@ export const betterAuthSession: BetterAuthSession = {
   cookieCache: {
     enabled: true,
     maxAge: 60 * 60 * 1, // Seconds * Minutes * Hours * Days
-    strategy: "jwt"
+    strategy: "jwt",
   },
 };
