@@ -2,21 +2,24 @@ import { Eye, EyeOff } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Activity, useState } from "react";
 import { useFieldContext } from "@/components/form/form-hooks";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import { cn } from "@/lib/utils";
 
-type FormInputProps = { label: string; type?: React.HTMLInputTypeAttribute };
+type FormInputProps = { label: string; description?: string; type?: React.HTMLInputTypeAttribute };
 
-export const FormInput = ({ label, type }: FormInputProps) => {
+export const FormInput = ({ label, description, type }: FormInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const field = useFieldContext<string>();
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
   return (
     <Field data-invalid={isInvalid}>
-      <FieldLabel htmlFor={field.name} className="text-sm">
+      <FieldLabel htmlFor={field.name} className="text-base">
         {label}
       </FieldLabel>
+      <Activity mode={description ? "visible" : "hidden"}>
+        <FieldDescription>{description}</FieldDescription>
+      </Activity>
       <InputGroup>
         <InputGroupInput
           id={field.name}
