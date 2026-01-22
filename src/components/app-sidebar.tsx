@@ -2,6 +2,8 @@
 
 import { ChevronDown, LogoutSquare01Icon, MoreVertical, Settings01Icon, User } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,8 +24,6 @@ import {
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/better-auth/client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export const AppSidebar = () => {
   const { isMobile } = useSidebar();
