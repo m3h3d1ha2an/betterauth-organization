@@ -18,7 +18,7 @@ export const FormInput = ({ label, description, type }: FormInputProps) => {
         {label}
       </FieldLabel>
       <Activity mode={description ? "visible" : "hidden"}>
-        <FieldDescription>{description}</FieldDescription>
+        <FieldDescription className="text-sm">{description}</FieldDescription>
       </Activity>
       <InputGroup>
         <InputGroupInput

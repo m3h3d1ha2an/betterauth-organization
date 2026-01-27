@@ -45,10 +45,6 @@ export const UserDropdown = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-full">
           <DropdownMenuItem>
-            <Avatar className="size-8 rounded-full">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="font-medium">{user.name}</span>
               <span className="text-muted-foreground text-xs">{user.email}</span>

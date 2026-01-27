@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const notFound = () => {
+const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="relative mb-6 text-center">
@@ -17,4 +17,4 @@ const notFound = () => {
   );
 };
 
-export default notFound;
+export default NotFound;

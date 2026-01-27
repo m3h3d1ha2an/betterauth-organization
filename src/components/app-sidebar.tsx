@@ -51,7 +51,7 @@ export const AppSidebar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger render={<SidebarMenuButton />}>
                 <Avatar className="size-8 rounded-full">
-                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarImage src="https://github.com/better-auth/better-auth/blob/canary/demo/nextjs/public/favicon/apple-touch-icon.png?raw=true" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <span className="text-sm">BetterAuth Inc</span>
